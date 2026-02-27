@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { simulatePrediction, getSeverity, getUrgency, getDietRecommendations, generateReport, type DiseaseName } from "@/lib/diseases";
+import { simulatePrediction, getSeverity, getUrgency, getDietRecommendations, generateReport, DISEASES, type DiseaseName } from "@/lib/diseases";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -40,6 +40,7 @@ export default function DetectPage() {
   const severity = result ? getSeverity(result.confidence) : null;
   const urgency = result ? getUrgency(result.disease, severity!) : null;
   const diet = result ? getDietRecommendations(result.disease) : [];
+  const diseaseInfo = result ? DISEASES.find((d) => d.name === result.disease) : null;
   const reportText = result ? generateReport(result.disease, result.confidence, severity!) : "";
 
   const downloadReport = () => {
@@ -153,6 +154,36 @@ export default function DetectPage() {
                 })}
               </div>
             </div>
+
+            {/* Causes */}
+            {diseaseInfo && diseaseInfo.causes.length > 0 && (
+              <div className="bg-card rounded-2xl p-6 shadow-card">
+                <h3 className="font-display text-lg font-semibold mb-3">🔍 Possible Causes / Reasons</h3>
+                <ul className="space-y-2">
+                  {diseaseInfo.causes.map((c) => (
+                    <li key={c} className="flex items-start gap-2 text-sm">
+                      <span className="text-warning mt-0.5">⚡</span>
+                      <span className="text-muted-foreground">{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Precautions */}
+            {diseaseInfo && (
+              <div className="bg-card rounded-2xl p-6 shadow-card">
+                <h3 className="font-display text-lg font-semibold mb-3">🛡️ Medical Precautions</h3>
+                <ul className="space-y-2">
+                  {diseaseInfo.precautions.map((p) => (
+                    <li key={p} className="flex items-start gap-2 text-sm">
+                      <span className="text-info mt-0.5">🔹</span>
+                      <span className="text-muted-foreground">{p}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
 
             {/* Diet */}
             <div className="bg-card rounded-2xl p-6 shadow-card">

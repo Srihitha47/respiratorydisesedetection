@@ -1,22 +1,43 @@
-import { MOCK_DOCTORS } from "@/lib/doctors";
+import { MOCK_DOCTORS, CITIES } from "@/lib/doctors";
 import { useState } from "react";
 
 export default function DoctorsPage() {
   const [search, setSearch] = useState("");
-  const filtered = MOCK_DOCTORS.filter(
-    (d) =>
+  const [selectedCity, setSelectedCity] = useState<string>("All Cities");
+
+  const filtered = MOCK_DOCTORS.filter((d) => {
+    const matchesSearch =
       d.name.toLowerCase().includes(search.toLowerCase()) ||
       d.specialty.toLowerCase().includes(search.toLowerCase()) ||
-      d.hospital.toLowerCase().includes(search.toLowerCase())
-  );
+      d.hospital.toLowerCase().includes(search.toLowerCase());
+    const matchesCity = selectedCity === "All Cities" || d.city === selectedCity;
+    return matchesSearch && matchesCity;
+  });
 
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="container max-w-5xl">
         <h1 className="font-display text-3xl md:text-4xl font-bold mb-2">🏥 Find a Doctor</h1>
-        <p className="text-muted-foreground mb-8">
-          Locate nearby pulmonologists and respiratory healthcare centers.
+        <p className="text-muted-foreground mb-6">
+          Locate nearby pulmonologists and respiratory healthcare centers across India.
         </p>
+
+        {/* City filter */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {CITIES.map((city) => (
+            <button
+              key={city}
+              onClick={() => setSelectedCity(city)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                selectedCity === city
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-secondary text-secondary-foreground hover:bg-accent"
+              }`}
+            >
+              {city}
+            </button>
+          ))}
+        </div>
 
         <input
           type="text"
@@ -25,6 +46,8 @@ export default function DoctorsPage() {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full mb-8 px-5 py-3.5 rounded-xl bg-card border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring shadow-card"
         />
+
+        <p className="text-sm text-muted-foreground mb-4">{filtered.length} doctor{filtered.length !== 1 ? "s" : ""} found{selectedCity !== "All Cities" ? ` in ${selectedCity}` : ""}</p>
 
         <div className="grid md:grid-cols-2 gap-5">
           {filtered.map((doc) => (
@@ -44,7 +67,7 @@ export default function DoctorsPage() {
               </div>
               <div className="space-y-1.5 text-sm text-muted-foreground">
                 <p>🏥 {doc.hospital}</p>
-                <p>📍 {doc.address} · {doc.distance}</p>
+                <p>📍 {doc.address}, {doc.city} · {doc.distance}</p>
                 <p>🕐 {doc.availability}</p>
                 <p>📞 {doc.phone}</p>
               </div>
