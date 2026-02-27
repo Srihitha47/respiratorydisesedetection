@@ -5,8 +5,11 @@ import { useState } from "react";
 const NAV_ITEMS = [
   { label: "Home", path: "/", icon: "🏠" },
   { label: "Detect", path: "/detect", icon: "🩺" },
+  { label: "Symptoms", path: "/symptoms", icon: "📋" },
+  { label: "Breathing", path: "/breathing", icon: "🧘" },
   { label: "Doctors", path: "/doctors", icon: "🏥" },
   { label: "Chatbot", path: "/chatbot", icon: "💬" },
+  { label: "SOS", path: "/emergency", icon: "🚨" },
 ];
 
 export default function Navbar() {
@@ -28,23 +31,21 @@ export default function Navbar() {
               key={item.path}
               to={item.path}
               className={cn(
-                "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                "px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                item.path === "/emergency" && "text-destructive hover:bg-destructive/10",
                 location.pathname === item.path
-                  ? "bg-primary text-primary-foreground shadow-card"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                  ? item.path === "/emergency" ? "bg-destructive text-destructive-foreground shadow-card" : "bg-primary text-primary-foreground shadow-card"
+                  : item.path !== "/emergency" && "text-muted-foreground hover:text-foreground hover:bg-secondary"
               )}
             >
-              <span className="mr-1.5">{item.icon}</span>
+              <span className="mr-1">{item.icon}</span>
               {item.label}
             </Link>
           ))}
         </div>
 
         {/* Mobile toggle */}
-        <button
-          className="md:hidden p-2 rounded-lg hover:bg-secondary"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
+        <button className="md:hidden p-2 rounded-lg hover:bg-secondary" onClick={() => setMobileOpen(!mobileOpen)}>
           <span className="text-xl">{mobileOpen ? "✕" : "☰"}</span>
         </button>
       </div>
@@ -53,15 +54,10 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden border-t border-border bg-card p-4 space-y-1">
           {NAV_ITEMS.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={() => setMobileOpen(false)}
+            <Link key={item.path} to={item.path} onClick={() => setMobileOpen(false)}
               className={cn(
                 "block px-4 py-3 rounded-lg text-sm font-medium transition-all",
-                location.pathname === item.path
-                  ? "bg-primary text-primary-foreground"
-                  : "text-muted-foreground hover:bg-secondary"
+                location.pathname === item.path ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-secondary"
               )}
             >
               <span className="mr-2">{item.icon}</span>

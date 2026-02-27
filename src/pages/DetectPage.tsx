@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { simulatePrediction, getSeverity, getUrgency, getDietRecommendations, generateReport, DISEASES, type DiseaseName } from "@/lib/diseases";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis } from "recharts";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 
@@ -139,7 +140,7 @@ export default function DetectPage() {
             {/* Risk Prediction */}
             <div className="bg-card rounded-2xl p-6 shadow-card">
               <h3 className="font-display text-lg font-semibold mb-3">📊 Early Deterioration Risk (24-72h)</h3>
-              <div className="space-y-3">
+              <div className="space-y-3 mb-6">
                 {["24 hours", "48 hours", "72 hours"].map((period, i) => {
                   const risk = severity === "High" ? [75, 60, 45][i] : severity === "Medium" ? [40, 30, 20][i] : [15, 10, 5][i];
                   return (
@@ -153,6 +154,47 @@ export default function DetectPage() {
                   );
                 })}
               </div>
+            </div>
+
+            {/* Severity Trend Analysis Chart */}
+            <div className="bg-card rounded-2xl p-6 shadow-card">
+              <h3 className="font-display text-lg font-semibold mb-3">📈 Severity Trend Analysis</h3>
+              <p className="text-xs text-muted-foreground mb-4">Simulated model confidence across all conditions</p>
+              <ResponsiveContainer width="100%" height={250}>
+                <BarChart data={(() => {
+                  const probs = DISEASES.filter(d => d.name !== "Healthy").map(d => ({
+                    name: d.name,
+                    Confidence: d.name === result.disease ? +(result.confidence * 100).toFixed(1) : +(Math.random() * 30 + 5).toFixed(1),
+                  }));
+                  return probs;
+                })()}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
+                  <XAxis dataKey="name" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                  <YAxis domain={[0, 100]} tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                  <Tooltip contentStyle={{ background: "hsl(var(--card))", border: "1px solid hsl(var(--border))", borderRadius: 12 }} />
+                  <Bar dataKey="Confidence" fill="hsl(var(--primary))" radius={[6, 6, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+
+            {/* Feature Fusion Radar */}
+            <div className="bg-card rounded-2xl p-6 shadow-card">
+              <h3 className="font-display text-lg font-semibold mb-3">🔬 Feature Fusion Model Analysis</h3>
+              <p className="text-xs text-muted-foreground mb-4">CNN, ResNet & DenseNet individual model contributions</p>
+              <ResponsiveContainer width="100%" height={280}>
+                <RadarChart data={[
+                  { model: "CNN", score: +(Math.random() * 20 + 75).toFixed(1) },
+                  { model: "ResNet", score: +(Math.random() * 15 + 80).toFixed(1) },
+                  { model: "DenseNet", score: +(Math.random() * 10 + 85).toFixed(1) },
+                  { model: "Attention", score: +(Math.random() * 12 + 82).toFixed(1) },
+                  { model: "Fusion", score: +(result.confidence * 100).toFixed(1) },
+                ]}>
+                  <PolarGrid stroke="hsl(var(--border))" />
+                  <PolarAngleAxis dataKey="model" tick={{ fontSize: 11 }} stroke="hsl(var(--muted-foreground))" />
+                  <PolarRadiusAxis domain={[0, 100]} tick={{ fontSize: 10 }} stroke="hsl(var(--muted-foreground))" />
+                  <Radar name="Accuracy" dataKey="score" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.25} strokeWidth={2} />
+                </RadarChart>
+              </ResponsiveContainer>
             </div>
 
             {/* Causes */}

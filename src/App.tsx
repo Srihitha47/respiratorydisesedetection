@@ -8,6 +8,9 @@ import HomePage from "@/pages/HomePage";
 import DetectPage from "@/pages/DetectPage";
 import DoctorsPage from "@/pages/DoctorsPage";
 import ChatbotPage from "@/pages/ChatbotPage";
+import SymptomTrackerPage from "@/pages/SymptomTrackerPage";
+import BreathingExercisePage from "@/pages/BreathingExercisePage";
+import EmergencySOSPage from "@/pages/EmergencySOSPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +27,9 @@ const App = () => (
           <Route path="/detect" element={<DetectPage />} />
           <Route path="/doctors" element={<DoctorsPage />} />
           <Route path="/chatbot" element={<ChatbotPage />} />
+          <Route path="/symptoms" element={<SymptomTrackerPage />} />
+          <Route path="/breathing" element={<BreathingExercisePage />} />
+          <Route path="/emergency" element={<EmergencySOSPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

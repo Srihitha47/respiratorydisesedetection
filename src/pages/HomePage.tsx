@@ -68,8 +68,11 @@ export default function HomePage() {
             { icon: "📊", title: "Risk Prediction", desc: "Early deterioration forecasting within 24–72 hours using severity trends and historical data." },
             { icon: "🩺", title: "Clinical Decision Support", desc: "Urgency classification: Immediate, Recommended, or Monitor-at-Home consultation advice." },
             { icon: "📄", title: "Automated Reports", desc: "Personalized health reports with diet, lifestyle recommendations, and severity assessment." },
-            { icon: "🏥", title: "Doctor Finder", desc: "Location-based pulmonologist and healthcare center recommendations near you." },
-            { icon: "💬", title: "AI Chatbot", desc: "Intelligent assistant for respiratory health queries, guidance, and support." },
+            { icon: "🏥", title: "Doctor Finder", desc: "Geolocation-based pulmonologist and hospital recommendations sorted by proximity." },
+            { icon: "💬", title: "AI Chatbot", desc: "Intelligent assistant for respiratory health queries with X-ray & audio upload support." },
+            { icon: "📋", title: "Symptom Tracker", desc: "Log daily symptoms, track trends with charts, and monitor oxygen saturation over time." },
+            { icon: "🧘", title: "Breathing Exercises", desc: "Guided breathing techniques — Box, 4-7-8, Diaphragmatic — with interactive timers." },
+            { icon: "🚨", title: "Emergency SOS", desc: "One-tap emergency button with auto-location, nearby hospitals, and first aid guidance." },
           ].map((f) => (
             <div key={f.title} className="bg-card rounded-2xl p-6 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300">
               <span className="text-3xl mb-3 block">{f.icon}</span>
