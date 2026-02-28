@@ -61,9 +61,11 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        "deep-blue": "hsl(var(--deep-blue))",
-        "blue-glow": "hsl(var(--blue-glow))",
-        lavender: "hsl(var(--lavender))",
+        teal: {
+          dark: "hsl(var(--teal-dark))",
+          glow: "hsl(var(--teal-glow))",
+        },
+        mint: "hsl(var(--mint))",
         success: "hsl(var(--success))",
         warning: "hsl(var(--warning))",
         info: "hsl(var(--info))",
@@ -91,8 +93,8 @@ export default {
           to: { opacity: "1", transform: "translateX(0)" },
         },
         "pulse-glow": {
-          "0%, 100%": { boxShadow: "0 0 20px hsl(200 100% 55% / 0.15)" },
-          "50%": { boxShadow: "0 0 40px hsl(200 100% 55% / 0.3)" },
+          "0%, 100%": { boxShadow: "0 0 20px hsl(174 100% 24% / 0.15)" },
+          "50%": { boxShadow: "0 0 40px hsl(174 100% 24% / 0.3)" },
         },
         "float": {
           "0%, 100%": { transform: "translateY(0)" },
