@@ -31,7 +31,7 @@ export default function EmergencySOSPage() {
           setLocating(false);
         },
         () => {
-          setLocation({ lat: 12.9716, lng: 77.5946 }); // fallback to Bengaluru
+          setLocation({ lat: 12.9716, lng: 77.5946 });
           setLocating(false);
         }
       );
@@ -61,9 +61,11 @@ export default function EmergencySOSPage() {
     }
   };
 
-  const mapUrl = location
-    ? `https://www.google.com/maps?q=hospitals+near+${location.lat},${location.lng}`
-    : "#";
+  const openMap = () => {
+    if (location) {
+      window.open(`https://www.google.com/maps/search/hospitals+near+${location.lat},${location.lng}`, "_blank", "noopener,noreferrer");
+    }
+  };
 
   return (
     <div className="min-h-screen pt-20 pb-16">
@@ -94,14 +96,12 @@ export default function EmergencySOSPage() {
               {location ? (
                 <div className="space-y-2">
                   <p className="text-sm text-muted-foreground">Latitude: {location.lat.toFixed(4)}, Longitude: {location.lng.toFixed(4)}</p>
-                  <a
-                    href={mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    onClick={openMap}
                     className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:underline"
                   >
                     🗺️ View nearby hospitals on Google Maps →
-                  </a>
+                  </button>
                 </div>
               ) : (
                 <Button onClick={getLocation} disabled={locating} variant="outline" size="sm" className="rounded-xl">
