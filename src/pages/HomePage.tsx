@@ -25,7 +25,7 @@ export default function HomePage() {
           <div className="flex flex-wrap justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
             <Link
               to="/detect"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary-foreground text-teal-dark font-semibold text-lg shadow-elevated hover:scale-105 transition-transform"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary-foreground text-deep-blue font-semibold text-lg shadow-elevated hover:scale-105 transition-transform"
             >
               🩺 Start Diagnosis
             </Link>
