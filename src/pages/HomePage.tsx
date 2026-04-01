@@ -5,37 +5,30 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <div className="min-h-screen pt-16">
-      {/* Hero */}
-      <section className="relative overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${heroImage})` }}
-        />
-        <div className="absolute inset-0 gradient-hero opacity-80" />
-        <div className="relative container py-24 md:py-36 text-center">
-          <p className="text-accent text-sm font-semibold tracking-widest uppercase mb-4 animate-fade-in">
-            AI-Powered Respiratory Healthcare
-          </p>
-          <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-primary-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-            Lung Health Platform
-          </h1>
-          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-10 animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            Advanced multimodal AI system analyzing chest X-rays and lung sounds for accurate disease detection, severity assessment, and personalized health guidance.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Link
-              to="/detect"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary-foreground text-teal-dark font-semibold text-lg shadow-elevated hover:scale-105 transition-transform"
-            >
-              🩺 Start Diagnosis
-            </Link>
-            <Link
-              to="/chatbot"
-              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl border-2 border-primary-foreground/30 text-primary-foreground font-semibold text-lg hover:bg-primary-foreground/10 transition-colors"
-            >
-              💬 AI Assistant
-            </Link>
-          </div>
+      {/* Header */}
+      <section className="container py-16 text-center">
+        <p className="text-primary text-sm font-semibold tracking-widest uppercase mb-4">
+          AI-Powered Respiratory Healthcare
+        </p>
+        <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 text-gradient">
+          LungAI — Disease Detection Platform
+        </h1>
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
+          Advanced multimodal AI system analyzing chest X-rays and lung sounds for accurate disease detection, severity assessment, and personalized health guidance.
+        </p>
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link
+            to="/detect"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-primary text-primary-foreground font-semibold text-lg shadow-elevated hover:scale-105 transition-transform"
+          >
+            🩺 Start Diagnosis
+          </Link>
+          <Link
+            to="/chatbot"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl border-2 border-border text-foreground font-semibold text-lg hover:bg-secondary transition-colors"
+          >
+            💬 AI Assistant
+          </Link>
         </div>
       </section>
 
