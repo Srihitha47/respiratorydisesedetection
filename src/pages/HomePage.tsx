@@ -11,7 +11,7 @@ export default function HomePage() {
           AI-Powered Respiratory Healthcare
         </p>
         <h1 className="font-display text-4xl md:text-5xl font-bold mb-4 text-gradient">
-          Multimodal AI Framework for Respiratory Disease Detection
+          Multimodal AI Framework For Respiratory Disease Classification
         </h1>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
           Advanced multimodal AI system analyzing chest X-rays and lung sounds for accurate disease detection, severity assessment, and personalized health guidance.
